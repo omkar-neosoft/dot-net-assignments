@@ -9,7 +9,7 @@
         }
 
         public virtual void DisplayDetails() {
-            Console.WriteLine($"Employee Name: {Name}, Salary: {Salary:C}");
+            Console.WriteLine($"Employee Name: {Name}, Salary: {Salary}");
         }
     }
 }

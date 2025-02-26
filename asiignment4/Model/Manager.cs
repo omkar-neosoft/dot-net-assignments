@@ -8,7 +8,7 @@
         }
 
         public override void DisplayDetails() {
-            Console.WriteLine($"Manager Name: {Name}, Salary: {Salary:C}, Bonus: {Bonus:C}");
+            Console.WriteLine($"Manager Name: {Name}, Salary: {Salary}, Bonus: {Bonus}");
         }
     }
 
