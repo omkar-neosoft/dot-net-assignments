@@ -57,15 +57,6 @@ namespace CollectionsHackathonDay8 {
                         case 4:
                             Console.Write("\nEnter Policy ID: ");
                             int updateID = int.Parse(Console.ReadLine());
-                            //Console.Write("Enter New Policy Holder Name: ");
-                            //string newName = Console.ReadLine();
-                            //Console.Write("Enter New Policy Type: ");
-                            //PolicyType newType = (PolicyType)Enum.Parse(typeof(PolicyType), Console.ReadLine(), true);
-                            //Console.Write("Enter New Start Date (yyyy-mm-dd): ");
-                            //DateTime newStart = DateTime.Parse(Console.ReadLine());
-                            //Console.Write("Enter New End Date (yyyy-mm-dd): ");
-                            //DateTime newEnd = DateTime.Parse(Console.ReadLine());
-                            //policyRepo.UpdatePolicy(updateID, newName, newType, newStart, newEnd);
                             policyRepo.UpdatePolicy(updateID);
                             break;
 

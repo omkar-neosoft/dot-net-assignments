@@ -9,7 +9,6 @@ using CollectionsHackathonDay8.Models;
 
 namespace CollectionsHackathonDay8.Repository {
     public class PolicyRepository : IPolicyRepository {
-        //private readonly List<Policy> policies = new List<Policy>();
         private static List<Policy> policies = new List<Policy>();
 
         public void AddPolicy(Policy policy) {
@@ -52,7 +51,6 @@ namespace CollectionsHackathonDay8.Repository {
             return policy;
         }
 
-        //public void UpdatePolicy(int policyID, string name, PolicyType type, DateTime startDate, DateTime endDate) {
         public void UpdatePolicy(int policyID) {
             var policy = SearchPolicyById(policyID);
             Console.Write("Enter New Policy Holder Name (Leave blank to keep unchanged): ");
