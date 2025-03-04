@@ -11,6 +11,13 @@ namespace CollectionsHackathonDay8.Repository {
     public class PolicyRepository : IPolicyRepository {
         private static List<Policy> policies = new List<Policy>();
 
+        public PolicyRepository() {
+            policies.Add(new Policy(1, "Ram", PolicyType.Life, DateTime.Parse("2023-01-01"), DateTime.Parse("2028-01-01")));
+            policies.Add(new Policy(2, "Sham", PolicyType.Health, DateTime.Parse("2022-06-15"), DateTime.Parse("2027-06-15")));
+            policies.Add(new Policy(3, "Raj", PolicyType.Vehicle, DateTime.Parse("2024-03-10"), DateTime.Parse("2026-03-10")));
+            policies.Add(new Policy(4, "Taj", PolicyType.Property, DateTime.Parse("2023-09-20"), DateTime.Parse("2029-09-20")));
+        }
+
         public void AddPolicy(Policy policy) {
             if (policies.Any(p => p.PolicyID == policy.PolicyID)) {
                 Console.ForegroundColor = ConsoleColor.Red;
