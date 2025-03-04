@@ -39,7 +39,7 @@ namespace CollectionsHackathonDay8.Models {
         }
 
         public override string ToString() {
-            return $"| {PolicyID,-10} | {PolicyHolderName,-15} | {Type,-10} | {StartDate.ToShortDateString(),-10} | {EndDate.ToShortDateString(),-10} | {IsActive(),-10} |";
+            return $"| {PolicyID,-10} | {PolicyHolderName,-15} | {Type,-10} | {StartDate.ToString("yyyy-MM-dd"),-10} | {EndDate.ToString("yyyy-MM-dd"),-10} | {IsActive(),-10} |";
         }
     }
 }

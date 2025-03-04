@@ -35,8 +35,9 @@ namespace CollectionsHackathonDay8 {
                             string name = Console.ReadLine();
                             Console.Write("Enter Policy Type (Life, Health, Vehicle, Property): ");
                             PolicyType type = (PolicyType)Enum.Parse(typeof(PolicyType), Console.ReadLine(), true);
-                            Console.Write("Enter Start Date (yyyy-mm-dd): ");
-                            DateTime startDate = DateTime.Parse(Console.ReadLine());
+                            //Console.Write("Enter Start Date (yyyy-mm-dd): ");
+                            //DateTime startDate = DateTime.Parse(Console.ReadLine());
+                            DateTime startDate = DateTime.Parse(DateTime.Now.ToString("MM-dd-yyyy"));
                             Console.Write("Enter End Date (yyyy-mm-dd): ");
                             DateTime endDate = DateTime.Parse(Console.ReadLine());
                             policyRepo.AddPolicy(new Policy(policyID, name, type, startDate, endDate));
