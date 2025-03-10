@@ -89,13 +89,6 @@ namespace CollectionsHackathonDay8.Repository {
                 return policy;
             }
         }
-        //public Policy SearchPolicyById(int policyID) {
-        //    var policy = policies.FirstOrDefault(p => p.PolicyID == policyID);
-        //    if (policy == null) {
-        //        throw new PolicyNotFoundException("\n[✖] Error: Policy not found!");
-        //    }
-        //    return policy;
-        //}
 
         public void UpdatePolicy(int policyID) {
             var policy = FindPolicyById(policyID);
@@ -214,6 +207,16 @@ namespace CollectionsHackathonDay8.Repository {
             }
         }
 
+        #region Console App
+
+        //public Policy SearchPolicyById(int policyID) {
+        //    var policy = policies.FirstOrDefault(p => p.PolicyID == policyID);
+        //    if (policy == null) {
+        //        throw new PolicyNotFoundException("\n[✖] Error: Policy not found!");
+        //    }
+        //    return policy;
+        //}
+
 
         //public void AddPolicy(Policy policy) {
         //    if (policies.Any(p => p.PolicyID == policy.PolicyID)) {
@@ -302,5 +305,7 @@ namespace CollectionsHackathonDay8.Repository {
         //    } else
         //        activePolicies.ForEach(p => Console.WriteLine(p));
         //}
+
+        #endregion
     }
 }
