@@ -10,8 +10,9 @@ namespace CollectionsHackathonDay8.Interface {
         void AddPolicy(Policy policy);
         List<Policy> ViewAllPolicies();
         Policy SearchPolicyById(int policyID);
+        Policy FindPolicyById(int policyID);
         void UpdatePolicy(int policyID);
         void DeletePolicy(int policyID);
-        void ViewActivePolicies();
+        List<Policy> ViewActivePolicies();
     }
 }

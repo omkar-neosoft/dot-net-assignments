@@ -26,8 +26,8 @@ namespace CollectionsHackathonDay8.Models {
             get; set;
         }
 
-        public Policy(int policyID, string policyHolderName, PolicyType type, DateTime startDate, DateTime endDate) {
-            PolicyID = policyID;
+        public Policy(string policyHolderName, PolicyType type, DateTime startDate, DateTime endDate) {
+            //PolicyID = policyID;
             PolicyHolderName = policyHolderName;
             Type = type;
             StartDate = startDate;

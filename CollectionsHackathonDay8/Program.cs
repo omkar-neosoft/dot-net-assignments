@@ -45,8 +45,8 @@ namespace CollectionsHackathonDay8 {
                 try {
                     switch (choice) {
                         case 1:
-                            Console.Write("\nEnter Policy ID: ");
-                            int policyID = int.Parse(Console.ReadLine());
+                            //Console.Write("\nEnter Policy ID: ");
+                            //int policyID = int.Parse(Console.ReadLine());
                             Console.Write("Enter Policy Holder Name: ");
                             string name = Console.ReadLine();
                             Console.Write("Enter Policy Type (Life, Health, Vehicle, Property): ");
@@ -56,17 +56,41 @@ namespace CollectionsHackathonDay8 {
                             DateTime startDate = DateTime.Parse(DateTime.Now.ToString("MM-dd-yyyy"));
                             Console.Write("Enter End Date (yyyy-mm-dd): ");
                             DateTime endDate = DateTime.Parse(Console.ReadLine());
-                            policyRepo.AddPolicy(new Policy(policyID, name, type, startDate, endDate));
+                            if (startDate >= endDate) {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("\n[✖] Error: Policy start date should be grater than end date!");
+                                Console.ResetColor();
+                                break;
+                            }
+
+                            policyRepo.AddPolicy(new Policy(name, type, startDate, endDate));
                             break;
 
                         case 2:
-                            policyRepo.ViewAllPolicies();
+                            List<Policy> policies = policyRepo.ViewAllPolicies();
+                            if (policies.Count == 0) {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("\n[✖] Error:No policies found.");
+                                Console.ResetColor();
+                            } else {
+                                Console.WriteLine($"| {"ID",-10} | {"Name",-15} | {"Type",-10} | {"Start",-10} | {"End",-10} | {"Active",-10} |");
+                                policies.ForEach(p => {
+                                    Console.WriteLine(p);
+                                });
+                            }
                             break;
 
                         case 3:
                             Console.Write("\nEnter Policy ID: ");
                             int searchID = int.Parse(Console.ReadLine());
-                            var policy = policyRepo.SearchPolicyById(searchID);
+                            //var policy = policyRepo.SearchPolicyById(searchID);
+                            Policy policy = policyRepo.FindPolicyById(searchID);
+                            if (policy.PolicyID == 0) {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("\n[✖] Error: Policy not found!");
+                                Console.ResetColor();
+                                break;
+                            }
                             Console.WriteLine($"| {"ID",-10} | {"Name",-15} | {"Type",-10} | {"Start",-10} | {"End",-10} | {"Active",-10} |");
                             Console.WriteLine(policy);
                             break;
@@ -84,7 +108,17 @@ namespace CollectionsHackathonDay8 {
                             break;
 
                         case 6:
-                            policyRepo.ViewActivePolicies();
+                            List<Policy> activePolicies = policyRepo.ViewActivePolicies();
+                            if (activePolicies.Count == 0) {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("\n[✖] Error:No policies found.");
+                                Console.ResetColor();
+                            } else {
+                                Console.WriteLine($"| {"ID",-10} | {"Name",-15} | {"Type",-10} | {"Start",-10} | {"End",-10} | {"Active",-10} |");
+                                activePolicies.ForEach(p => {
+                                    Console.WriteLine(p);
+                                });
+                            }
                             break;
 
                         case 7:

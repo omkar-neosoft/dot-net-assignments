@@ -5,9 +5,9 @@ GO
 
 CREATE TABLE Policies (
     PolicyID INT IDENTITY(1,1) PRIMARY KEY,
-    PolicyHolderName NVARCHAR(100) NOT NULL,
-    PolicyType NVARCHAR(50) CHECK (PolicyType IN ('Life', 'Health', 'Vehicle', 'Property')) NOT NULL,
-	Type INT,
+    PolicyHolderName VARCHAR(100) NOT NULL,
+    PolicyType VARCHAR(50) CHECK (PolicyType IN ('Life', 'Health', 'Vehicle', 'Property')) NOT NULL,
+	Type INT Null,
     StartDate DATE NOT NULL,
     EndDate DATE NOT NULL
 );
