@@ -8,7 +8,7 @@ using CollectionsHackathonDay8.Models;
 namespace CollectionsHackathonDay8.Interface {
     public interface IPolicyRepository {
         void AddPolicy(Policy policy);
-        void ViewAllPolicies();
+        List<Policy> ViewAllPolicies();
         Policy SearchPolicyById(int policyID);
         void UpdatePolicy(int policyID);
         void DeletePolicy(int policyID);

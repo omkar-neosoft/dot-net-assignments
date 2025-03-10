@@ -1,21 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CollectionsHackathonDay8.Exceptions;
 using CollectionsHackathonDay8.Interface;
 using CollectionsHackathonDay8.Models;
+using CollectionsHackathonDay8.Utility;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace CollectionsHackathonDay8.Repository {
     public class PolicyRepository : IPolicyRepository {
         private static List<Policy> policies = new List<Policy>();
+        SqlCommand cmd = null;
+        string connstring;
 
         public PolicyRepository() {
-            policies.Add(new Policy(1, "Ram", PolicyType.Life, DateTime.Parse("2023-01-01"), DateTime.Parse("2028-01-01")));
-            policies.Add(new Policy(2, "Sham", PolicyType.Health, DateTime.Parse("2022-06-15"), DateTime.Parse("2027-06-15")));
-            policies.Add(new Policy(3, "Raj", PolicyType.Vehicle, DateTime.Parse("2024-03-10"), DateTime.Parse("2026-03-10")));
-            policies.Add(new Policy(4, "Taj", PolicyType.Property, DateTime.Parse("2023-09-20"), DateTime.Parse("2029-09-20")));
+            //policies.Add(new Policy(1, "Ram", PolicyType.Life, DateTime.Parse("2023-01-01"), DateTime.Parse("2028-01-01")));
+            //policies.Add(new Policy(2, "Sham", PolicyType.Health, DateTime.Parse("2022-06-15"), DateTime.Parse("2027-06-15")));
+            //policies.Add(new Policy(3, "Raj", PolicyType.Vehicle, DateTime.Parse("2024-03-10"), DateTime.Parse("2026-03-10")));
+            //policies.Add(new Policy(4, "Taj", PolicyType.Property, DateTime.Parse("2023-09-20"), DateTime.Parse("2029-09-20")));
+            cmd = new SqlCommand();
+            connstring = DbConnUtil.GetConnectionString();
         }
 
         public void AddPolicy(Policy policy) {
@@ -37,7 +44,30 @@ namespace CollectionsHackathonDay8.Repository {
             Console.ResetColor();
         }
 
-        public void ViewAllPolicies() {
+        public List<Policy> ViewAllPolicies() {
+            List<Policy> policies = new List<Policy>();
+            using (SqlConnection sqlConnection = new SqlConnection(connstring)) {
+                cmd.CommandText = "select * from Policies";
+                cmd.Connection = sqlConnection;
+                sqlConnection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read()) {
+                    //create an object of BookClass
+                    Policy Policy = new Policy();
+                    Policy.PolicyID = (int)reader["bookid"];
+                    Policy.PolicyHolderName = (string)reader["title"];
+                    Policy.Type = (PolicyType)reader["PolicyType"];
+                    //Policy.Type = (PolicyType)Enum.Parse(typeof(PolicyType), reader["PolicyType"], true);
+
+                    Policy.StartDate = Convert.ToDateTime(reader["StartDate"]);
+                    Policy.EndDate = Convert.ToDateTime(reader["EndDate"]);
+
+                    policies.Add(Policy);
+                }
+
+                return policies;
+            }
+
             if (policies.Count == 0) {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("\n[✖] Error:No policies found.");

@@ -34,6 +34,9 @@ namespace CollectionsHackathonDay8.Models {
             EndDate = endDate;
         }
 
+        public Policy() {
+        }
+
         public bool IsActive() {
             return DateTime.Now >= StartDate && DateTime.Now <= EndDate;
         }

@@ -6,6 +6,22 @@ using CollectionsHackathonDay8.Repository;
 namespace CollectionsHackathonDay8 {
     internal class Program {
         static void Main(string[] args) {
+            /*
+             * CREATE DATABASE InsuranceDB;
+                GO
+                USE InsuranceDB;
+                GO
+            * CREATE TABLE Policies (
+                PolicyID INT IDENTITY(1,1) PRIMARY KEY,
+                PolicyHolderName NVARCHAR(100) NOT NULL,
+                PolicyType NVARCHAR(50) CHECK (PolicyType IN ('Life', 'Health', 'Vehicle', 'Property')) NOT NULL,
+                StartDate DATE NOT NULL,
+                EndDate DATE NOT NULL
+              );
+
+
+             */
+
             Console.OutputEncoding = Encoding.UTF8; // Enable Unicode Support
             IPolicyRepository policyRepo = new PolicyRepository();
             while (true) {
