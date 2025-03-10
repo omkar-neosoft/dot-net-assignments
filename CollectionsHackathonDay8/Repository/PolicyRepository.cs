@@ -89,13 +89,13 @@ namespace CollectionsHackathonDay8.Repository {
                 return policy;
             }
         }
-        public Policy SearchPolicyById(int policyID) {
-            var policy = policies.FirstOrDefault(p => p.PolicyID == policyID);
-            if (policy == null) {
-                throw new PolicyNotFoundException("\n[✖] Error: Policy not found!");
-            }
-            return policy;
-        }
+        //public Policy SearchPolicyById(int policyID) {
+        //    var policy = policies.FirstOrDefault(p => p.PolicyID == policyID);
+        //    if (policy == null) {
+        //        throw new PolicyNotFoundException("\n[✖] Error: Policy not found!");
+        //    }
+        //    return policy;
+        //}
 
         public void UpdatePolicy(int policyID) {
             var policy = FindPolicyById(policyID);
@@ -113,24 +113,47 @@ namespace CollectionsHackathonDay8.Repository {
 
                 Console.Write("Enter New Policy Type (Leave blank to keep unchanged): ");
                 string newTypeInput = Console.ReadLine();
-                if (!string.IsNullOrWhiteSpace(newTypeInput) && Enum.TryParse(newTypeInput, true, out PolicyType newType)) {
+                if (!string.IsNullOrWhiteSpace(newTypeInput)) {
+                    if (Enum.TryParse(typeof(PolicyType), newTypeInput, true, out object result) && Enum.IsDefined(typeof(PolicyType), result)) {
+                        PolicyType type = (PolicyType)result;
+                        args.Add("PolicyType = @PolicyType");
+                        cmd.Parameters.AddWithValue("@PolicyType", type.ToString());
+                    } else {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("[✖] Error: Invalid policy type entered. Please enter one of (Life, Health, Vehicle, Property).");
+                        Console.ResetColor();
+                        return;
+                    }
 
-                    args.Add("PolicyType = @PolicyType");
-                    cmd.Parameters.AddWithValue("@PolicyType", newType.ToString());
                 }
 
                 Console.Write("Enter New Start Date (yyyy-mm-dd) (Leave blank to keep unchanged): ");
                 string newStartInput = Console.ReadLine();
-                if (!string.IsNullOrWhiteSpace(newStartInput) && DateTime.TryParse(newStartInput, out DateTime newStart)) {
-                    args.Add("StartDate = @StartDate");
-                    cmd.Parameters.AddWithValue("@StartDate", newStart);
+
+                if (!string.IsNullOrWhiteSpace(newStartInput)) {
+                    if (DateTime.TryParse(newStartInput, out DateTime newStart)) {
+                        args.Add("StartDate = @StartDate");
+                        cmd.Parameters.AddWithValue("@StartDate", newStart);
+                    } else {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\n[✖] Error: Invalid date entered!");
+                        Console.ResetColor();
+                        return;
+                    }
                 }
 
                 Console.Write("Enter New End Date (yyyy-mm-dd) (Leave blank to keep unchanged): ");
                 string newEndInput = Console.ReadLine();
-                if (!string.IsNullOrWhiteSpace(newEndInput) && DateTime.TryParse(newEndInput, out DateTime newEnd)) {
-                    args.Add("EndDate = @EndDate");
-                    cmd.Parameters.AddWithValue("@EndDate", policy.EndDate);
+                if (!string.IsNullOrWhiteSpace(newEndInput)) {
+                    if (DateTime.TryParse(newEndInput, out DateTime newEnd)) {
+                        args.Add("EndDate = @EndDate");
+                        cmd.Parameters.AddWithValue("@EndDate", newEnd);
+                    } else {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\n[✖] Error: Invalid date entered!");
+                        Console.ResetColor();
+                        return;
+                    }
                 }
 
                 if (args.Count == 0) {

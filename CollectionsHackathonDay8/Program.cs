@@ -50,12 +50,28 @@ namespace CollectionsHackathonDay8 {
                             Console.Write("Enter Policy Holder Name: ");
                             string name = Console.ReadLine();
                             Console.Write("Enter Policy Type (Life, Health, Vehicle, Property): ");
-                            PolicyType type = (PolicyType)Enum.Parse(typeof(PolicyType), Console.ReadLine(), true);
+                            string inputType = Console.ReadLine();
+                            if (Enum.TryParse(typeof(PolicyType), inputType, true, out object result) && Enum.IsDefined(typeof(PolicyType), result)) {
+                                PolicyType type = (PolicyType)result;
+                            } else {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("[✖] Error: Invalid policy type entered. Please enter one of (Life, Health, Vehicle, Property).");
+                                Console.ResetColor();
+                                break;
+                            }
                             //Console.Write("Enter Start Date (yyyy-mm-dd): ");
                             //DateTime startDate = DateTime.Parse(Console.ReadLine());
                             DateTime startDate = DateTime.Parse(DateTime.Now.ToString("MM-dd-yyyy"));
                             Console.Write("Enter End Date (yyyy-mm-dd): ");
-                            DateTime endDate = DateTime.Parse(Console.ReadLine());
+                            string endDateString = Console.ReadLine();
+                            if (string.IsNullOrWhiteSpace(endDateString) || !DateTime.TryParse(endDateString, out DateTime endDate)) {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("\n[✖] Error: Invalid date entered!");
+                                Console.ResetColor();
+                                break;
+
+                            }
+                            //DateTime endDate = DateTime.Parse(endDateString);
                             if (startDate >= endDate) {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("\n[✖] Error: Policy start date should be grater than end date!");

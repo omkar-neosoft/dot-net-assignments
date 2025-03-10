@@ -9,7 +9,7 @@ namespace CollectionsHackathonDay8.Interface {
     public interface IPolicyRepository {
         void AddPolicy(Policy policy);
         List<Policy> ViewAllPolicies();
-        Policy SearchPolicyById(int policyID);
+        //Policy SearchPolicyById(int policyID);
         Policy FindPolicyById(int policyID);
         void UpdatePolicy(int policyID);
         void DeletePolicy(int policyID);
