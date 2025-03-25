@@ -1,0 +1,56 @@
+﻿@model IEnumerable<EventManagementSystem.ViewModels.TicketBookingViewModel>
+
+@{
+    ViewData["Title"] = "My Bookings";
+}
+
+<h2>My Bookings</h2>
+
+@if (!Model.Any())
+{
+    <p>No bookings found.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>User</td>
+                }
+                <th>Event Name</th>
+                <th>Event Location</th>
+                <th>Organizer</th>
+                <th>Tickets</th>
+                <th>Event Date</th>
+                <th>Booking Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>@(booking?.UserName ?? "Unknown Name")</td>
+                    }
+                    <td>@booking.EventName</td>
+                    <td>@booking.EventLocation</td>
+                    <td>@booking.OrganizerName</td>
+                    <td>@booking.Quantity</td>
+                    <td>@booking.EventDate.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@booking.BookingDate.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td class="text-center">
+                        <a asp-action="Cancel" asp-route-bookingId="@booking.Id"
+                           class="btn btn-danger btn-sm px-3">
+                            <i class="bi bi-x-circle"></i> Cancel
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}

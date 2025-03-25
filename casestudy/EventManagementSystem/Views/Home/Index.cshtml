@@ -1,0 +1,178 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<style>
+    /* Hero Section */
+
+    .hero-section {
+        background: linear-gradient(135deg, #4a90e2, #6a11cb); /* Subtle, modern blue-violet gradient */
+        color: white;
+        text-align: center;
+        padding: 120px 20px;
+        position: relative;
+        border-radius: 0 0 50px 50px;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-title {
+        font-size: 42px;
+        font-weight: bold;
+    }
+
+    .hero-text {
+        font-size: 18px;
+        margin-top: 10px;
+        opacity: 0.9;
+    }
+
+    .hero-btn {
+        background-color: #ffffff;
+        color: #4a90e2; /* Matches gradient theme */
+        padding: 12px 30px;
+        font-size: 20px;
+        font-weight: bold;
+        border-radius: 5px;
+        text-decoration: none;
+        border: 2px solid #ffffff;
+        transition: background 0.3s, color 0.3s;
+    }
+
+        .hero-btn:hover {
+            background-color: #4a90e2;
+            color: white;
+            border-color: #ffffff;
+        }
+    /* Section Styling */
+    .section {
+        padding: 60px 20px;
+        text-align: center;
+    }
+
+    .section-heading {
+        font-size: 30px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    /* Event Cards */
+    .event-card {
+        border: none;
+        border-radius: 10px;
+        padding: 15px;
+        transition: transform 0.3s ease-in-out;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        background: white;
+    }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .event-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+    /* Why Choose Us */
+    .feature-box {
+        padding: 20px;
+        border-radius: 10px;
+        transition: 0.3s;
+    }
+
+        .feature-box:hover {
+            background: #f8f9fa;
+        }
+
+    /* Testimonials */
+    .testimonial {
+        padding: 20px;
+        border-left: 4px solid #ff4500;
+        background: #f8f9fa;
+        border-radius: 5px;
+    }
+
+    /* Footer */
+    .footer {
+        background: #222;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+</style>
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">Find & Book Your Next Event</h1>
+        <p class="hero-text">Discover exciting concerts, workshops, and events near you.</p>
+        <a href="@Url.Action("Index", "Event")" class="hero-btn">Explore Events</a>
+    </div>
+</div>
+
+<!-- Featured Events -->
+<div class="container section">
+    <h2 class="section-heading">Upcoming Events</h2>
+    <div class="row">
+        @foreach (var eventItem in ViewBag.FeaturedEvents)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="event-card">
+                    <img src="@eventItem.ImagePath" alt="@eventItem.Name">
+                    <h4 class="mt-2">@eventItem.Name</h4>
+                    <p><strong>@eventItem.Date.ToString("dd MMM yyyy")</strong> - @eventItem.Location</p>
+                    <a href="@Url.Action("Details", "Event", new { id = eventItem.Id })" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Why Choose Us -->
+<div class="container section">
+    <h2 class="section-heading">Why Choose Us?</h2>
+    <div class="row">
+        <div class="col-md-4 feature-box">
+            <h4>🎟️ Easy Booking</h4>
+            <p>Book your favorite events instantly.</p>
+        </div>
+        <div class="col-md-4 feature-box">
+            <h4>🌍 Discover New Events</h4>
+            <p>Find exciting events happening near you.</p>
+        </div>
+        <div class="col-md-4 feature-box">
+            <h4>📅 Hassle-Free Management</h4>
+            <p>Event organizers can easily manage bookings.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Testimonials -->
+<div class="container section bg-light">
+    <h2 class="section-heading">What Our Users Say</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="testimonial">
+                <p>"This platform makes event booking so easy! I love the user experience and event variety." - <strong>Rahul S.</strong></p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="testimonial">
+                <p>"As an organizer, managing events has never been smoother. Highly recommended!" - <strong>Priya M.</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<EventManagementSystem.ViewModels.EventViewModel>
+
+<div class="row">
+    @*
+    @foreach (var eventItem in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-lg border-0">
+                <img src="@(string.IsNullOrEmpty(eventItem.ImagePath) ? Url.Content("~/images/default-event.png") : eventItem.ImagePath)"
+                     class="card-img-top event-img"
+                     alt="Event Image">
+                <div class="card-body r">
+                    <h5 class="card-title fw-bold">@eventItem.Name</h5>
+                    <p class="text-muted"><i class="fas fa-calendar-alt"></i> @eventItem.Date.ToString("dd-MM-yyyy")</p>
+                    <p><i class="fas fa-map-marker-alt"></i> @eventItem.Location</p>
+                    <a href="/Events/Details/@eventItem.Id" class="btn btn-primary btn-sm">View Details</a>
+                </div>
+            </div>
+        </div>
+    }
+    *@
+
+    @foreach (var eventItem in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-lg border-0">
+                <img src="@(string.IsNullOrEmpty(eventItem.ImagePath) ? Url.Content("~/images/default-event.png") : Url.Content($"~{eventItem.ImagePath}"))"
+                     class="card-img-top event-img"
+                     alt="Event Image">
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <td><strong>Event Name: </strong></td>
+                            <td>@eventItem.Name</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Date:</strong></td>
+                            <td><i class="fas fa-calendar-alt"></i> @eventItem.Date.ToString("dd-MM-yyyy")</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Location:</strong></td>
+                            <td><i class="fas fa-map-marker-alt"></i> @eventItem.Location</td>
+                        </tr>
+                    </table>
+                    @*
+                    <div class="text-center">
+                        <!-- View Details Button (Triggers Modal) -->
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#eventModal-@eventItem.Id">
+                            View Details
+                        </button>
+                        <!-- Book Now Button -->
+                        <a href="/Bookings/Create?eventId=@eventItem.Id" class="btn btn-success btn-sm">Book Now</a>
+                    </div>
+                    *@
+                    <div class="text-center">
+                        <!-- AJAX View Details Button -->
+                        <button class="btn btn-primary btn-sm view-details-btn" data-event-id="@eventItem.Id">
+                            View Details
+                        </button>
+                        <!-- Book Now Button -->
+                        <a href="/TicketBooking/Book/@eventItem.Id" class="btn btn-success btn-sm">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Include Partial View for Event Details Modal -->
+        @* @Html.Partial("_EventDetailsModal", eventItem) *@
+    }
+</div>
+
+<!-- Modal Container (Initially Empty) -->
+<div id="eventDetailsModalContainer"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                @* data: { id: eventId }, *@
+<script>
+    $(document).ready(function () {
+        $(".view-details-btn").click(function () {
+            var eventId = $(this).data("event-id");
+
+            $.ajax({
+                url: `/Event/GetEventDetails/${eventId}`,
+                type: "GET",
+                success: function (response) {
+                    $("#eventDetailsModalContainer").html(response);
+                    $("#eventDetailsModal").modal("show");
+                },
+                error: function () {
+                    alert("Failed to load event details.");
+                }
+            });
+        });
+    });
+</script>

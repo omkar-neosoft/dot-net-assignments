@@ -1,0 +1,49 @@
+﻿@model EventManagementSystem.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Log In";
+}
+
+<div class="container d-flex justify-content-center align-items-center vh-80">
+    <div class="card shadow-lg p-4" style="width: 400px; border-radius: 10px;">
+        <div class="card-body">
+            <h2 class="text-center mb-4">Login</h2>
+
+            <form asp-action="LogIn">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label fw-bold">Email</label>
+                    <input asp-for="Email" class="form-control" placeholder="Enter your email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label fw-bold">Password</label>
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Enter your password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input" asp-for="RememberMe" />
+                    <label class="form-check-label fw-bold" asp-for="RememberMe">Remember Me</label>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+
+            <hr class="my-3">
+            <div class="text-center">
+                <a asp-action="Register" class="text-decoration-none">Don't have an account? Register</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

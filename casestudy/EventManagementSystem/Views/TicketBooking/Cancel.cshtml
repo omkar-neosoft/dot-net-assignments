@@ -1,0 +1,27 @@
+﻿@model EventManagementSystem.ViewModels.TicketBookingViewModel
+
+@{
+    ViewData["Title"] = "Cancel Booking";
+}
+
+<h2>Cancel Booking</h2>
+
+<p>Are you sure you want to cancel this booking?</p>
+
+<dl class="row">
+    <dt class="col-sm-3">Event ID</dt>
+    <dd class="col-sm-9">@Model.EventId</dd>
+
+    <dt class="col-sm-3">Tickets</dt>
+    <dd class="col-sm-9">@Model.Quantity</dd>
+
+    <dt class="col-sm-3">Booking Date</dt>
+    <dd class="col-sm-9">@Model.BookingDate.ToString("yyyy-MM-dd HH:mm")</dd>
+</dl>
+
+<form asp-action="CancelConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">Confirm Cancel</button>
+    <a asp-action="MyBookings" class="btn btn-secondary">Back</a>
+</form>

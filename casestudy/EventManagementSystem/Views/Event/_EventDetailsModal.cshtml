@@ -1,0 +1,72 @@
+﻿@model EventManagementSystem.ViewModels.EventViewModel
+
+<div class="modal fade" id="eventDetailsModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">@Model.Name</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <td><strong>Date:</strong></td>
+                        <td><i class="fas fa-calendar-alt"></i> @Model.Date.ToString("dd-MM-yyyy")</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Location:</strong></td>
+                        <td><i class="fas fa-map-marker-alt"></i> @Model.Location</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ticket Price:</strong></td>
+                        <td><i class="fas fa-map-marker-alt"></i> ₹@Model.TicketPrice</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Available Seats:</strong></td>
+                        <td><i class="fas fa-map-marker-alt"></i> @Model.AvailableSeats</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <a href="/TicketBooking/Book/@Model.Id" class="btn btn-success">Book Now</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*
+
+<div class="modal fade" id="eventModal-@Model.Id" tabindex="-1" aria-labelledby="eventModalLabel-@Model.Id" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">@Model.Name</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <td><strong>Date:</strong></td>
+                        <td><i class="fas fa-calendar-alt"></i> @Model.Date.ToString("dd-MM-yyyy")</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Location:</strong></td>
+                        <td><i class="fas fa-map-marker-alt"></i> @Model.Location</td>
+                    </tr>
+                    <!--
+                    <tr> 
+                        <td><strong>Description:</strong></td>
+                        <td>@Model.Description</td> 
+                    </tr> -->
+                </table>
+            </div>
+            <div class="modal-footer">
+                <a href="/Bookings/Create?eventId=@Model.Id" class="btn btn-success">Book Now</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+*@

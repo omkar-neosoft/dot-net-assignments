@@ -1,0 +1,89 @@
+﻿@model EventManagementSystem.ViewModels.EventViewModel
+
+@{
+    ViewData["Title"] = "Create Event";
+}
+
+
+@* @ViewBag.Categories *@
+@* @ViewData["Categories"] *@
+
+<h2>Create Event</h2>
+
+<form asp-action="Create" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CategoryId">Category</label>
+        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories">
+            <option value="">-- Select Category --</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="OrganizerId">Organizer</label>
+        <select asp-for="OrganizerId" class="form-control" asp-items="ViewBag.Organizers">
+            <option value="">-- Select Organizer --</option>
+        </select>
+        <span asp-validation-for="OrganizerId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ImageFile">Event Image</label>
+        <input type="file" asp-for="ImageFile" class="form-control" />
+    </div>
+
+    @* <div class="form-group"> *@
+    @*     <label asp-for="CategoryId">Category</label> *@
+    @*     <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"> *@
+    @*         <option value="">-- Select Category --</option> *@
+    @*     </select> *@
+        @* <span asp-validation-for="CategoryId" class="text-danger"></span> *@
+    @*     <span asp-validation-for="CategoryId" class="text-danger"></span> *@
+    @* </div> *@
+
+        @* @foreach (var categories in ViewBag.Categories) *@
+        @* { *@
+        @*     <h2>@categories</h2> *@
+        @* } *@
+    @* <div class="form-group"> *@
+    @*     <label asp-for="OrganizerId">Organizer</label> *@
+    @*     <select asp-for="OrganizerId" class="form-control" asp-items="ViewBag.Organizers"> *@
+    @*         <option value="">-- Select Organizer --</option> *@
+    @*     </select> *@
+    @*     <span asp-validation-for="OrganizerId" class="text-danger"></span> *@
+    @* </div> *@
+
+    <h4>Event Details</h4>
+    <div class="form-group">
+        <label asp-for="Location"></label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Date"></label>
+        <input asp-for="Date" type="datetime-local" class="form-control" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AvailableSeats"></label>
+        <input asp-for="AvailableSeats" type="number" class="form-control" min="1" />
+        <span asp-validation-for="AvailableSeats" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TicketPrice"></label>
+        <input asp-for="TicketPrice" type="number" step="1" class="form-control" min="1.00" />
+        <span asp-validation-for="TicketPrice" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>

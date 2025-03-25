@@ -7,10 +7,10 @@ CREATE TABLE Policies (
     PolicyID INT IDENTITY(1,1) PRIMARY KEY,
     PolicyHolderName VARCHAR(100) NOT NULL,
     PolicyType VARCHAR(50) CHECK (PolicyType IN ('Life', 'Health', 'Vehicle', 'Property')) NOT NULL,
-	Type INT Null,
     StartDate DATE NOT NULL,
     EndDate DATE NOT NULL
 );
+	-- Type INT Null,
 
 INSERT INTO Policies (PolicyHolderName, PolicyType, StartDate, EndDate)
 VALUES 
@@ -19,3 +19,5 @@ VALUES
     ('Alice Johnson', 'Vehicle', '2024-03-10', '2026-03-10'),
     ('Bob Brown', 'Property', '2023-09-20', '2029-09-20');
 
+	drop table 
+	select * from Policies;
