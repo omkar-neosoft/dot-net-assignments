@@ -1,0 +1,20 @@
+<header class="navbar">
+    <!-- Sidebar Toggle Button (For Mobile) -->
+    <button class="menu-btn" (click)="toggleSidebar()">
+        <mat-icon>menu</mat-icon>
+    </button>
+
+    <div class="logo">
+        <h3>Banking App</h3>
+    </div>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a routerLink="/">Home</a></li>
+            <li><a routerLink="/dashboard">Dashboard</a></li>
+            <li *ngIf="isLoggedIn"><a routerLink="/profile">Profile</a></li>
+            <li *ngIf="!isLoggedIn"><a routerLink="/auth">Login</a></li>
+            <li *ngIf="isLoggedIn"><a (click)="logout()">Logout</a></li>
+        </ul>
+    </nav>
+</header>

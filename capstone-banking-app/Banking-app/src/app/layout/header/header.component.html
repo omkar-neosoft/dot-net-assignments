@@ -1,0 +1,66 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid">
+
+        <!-- Menu Icon (Visible in Mobile) -->
+        <button mat-icon-button class="d-lg-none menu-icon" (click)="toggleMobileMenu()">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <!-- Navbar Title -->
+        <a class="navbar-brand" href="#">🏦 Banking App</a>
+
+        <!-- Navbar Right Side (Logout) -->
+        <div class="ms-auto">
+            @if (authToken) {
+            <button mat-button color="warn" (click)="logout()" class="d-flex align-items-center justify-content-center">
+                <mat-icon class="mr-2">logout</mat-icon> Logout
+            </button>
+            }
+        </div>
+    </div>
+</nav>
+
+<!-- Sidebar (Visible only on large screens) -->
+@if (authToken) {
+<div class="sidebar d-none d-lg-block">
+    <ul>
+        <!-- <li><a routerLink="/dashboard"><mat-icon>dashboard</mat-icon> Dashboard</a></li> -->
+        <li><a routerLink="/accounts"><mat-icon>account_balance</mat-icon> Accounts</a></li>
+        <li><a routerLink="/transactions"><mat-icon>sync_alt</mat-icon> Transactions</a></li>
+        <!-- <li><a routerLink="/settings"><mat-icon>settings</mat-icon> Settings</a></li> -->
+    </ul>
+</div>
+}
+
+<!-- Mobile Menu Overlay -->
+<div *ngIf="mobileMenuOpen" class="mobile-menu-overlay">
+    <div class="mobile-menu">
+        <button mat-icon-button class="close-btn" (click)="toggleMobileMenu()">
+            <mat-icon>close</mat-icon>
+        </button>
+
+        <div class="menu-container">
+            <!-- Navbar Buttons -->
+            <div class="menu-section">
+                <h5>Menu</h5>
+                <button mat-button color="warn" (click)="logout()">
+                    <mat-icon>logout</mat-icon> Logout
+                </button>
+            </div>
+
+            @if (authToken) {
+            <!-- Sidebar Buttons -->
+            <div class="menu-section">
+                <h5>Navigation</h5>
+                <ul>
+                    <!-- <li><a routerLink="/dashboard"><mat-icon>dashboard</mat-icon> Dashboard</a></li> -->
+                    <li><a routerLink="/accounts"><mat-icon>account_balance</mat-icon> Accounts</a></li>
+                    <li><a routerLink="/transactions"><mat-icon>sync_alt</mat-icon> Transactions</a></li>
+                    <!-- <li><a routerLink="/settings"><mat-icon>settings</mat-icon> Settings</a></li> -->
+                </ul>
+            </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+/* Background gradient */
+.gradient-form {
+    background: #eee;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Centered form with increased width */
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+/* Form fields styling */
+mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Button styling */
+button {
+    width: 50%;
+    /* Centered button */
+    font-size: 16px;
+    padding: 12px;
+    border-radius: 8px;
+    transition: background 0.3s, transform 0.2s;
+    background-color: #005bbb;
+    color: white;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #004a99;
+    transform: scale(1.05);
+}
+
+/* Responsive Grid */
+@media (max-width: 768px) {
+    .col-md-6 {
+        width: 100%;
+    }
+
+    .card {
+        max-width: 90%;
+        /* Adjust form width on small screens */
+    }
+
+    button {
+        width: 100%;
+        /* Full width button on small screens */
+    }
+}
+
+/* Login link */
+p a {
+    color: #0078d4;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+p a:hover {
+    color: #004a99;
+    text-decoration: underline;
+}

@@ -1,0 +1,53 @@
+<section class="gradient-form">
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-md-10 col-lg-6"> <!-- Adjusted width -->
+                <div class="card rounded-3 text-black">
+                    <div class="card-body p-md-5 mx-md-4">
+                        <div class="text-center d-flex justify-content-center align-items-center">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                                style="width: 90px;" alt="logo">
+                            <h4 class="mt-3 mb-4">Banking App Login</h4>
+                        </div>
+                        <div class="text-center">
+                            <p>Please login to your account</p>
+                        </div>
+
+                        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                            <!-- Email Field -->
+                            <mat-form-field appearance="outline">
+                                <mat-label>Email</mat-label>
+                                <input matInput formControlName="email" type="email" placeholder="Enter your email">
+                                <mat-icon matSuffix>email</mat-icon>
+                            </mat-form-field>
+
+                            <!-- Password Field -->
+                            <mat-form-field appearance="outline">
+                                <mat-label>Password</mat-label>
+                                <input matInput formControlName="password" type="password" placeholder="Enter password">
+                                <mat-icon matSuffix>lock</mat-icon>
+                            </mat-form-field>
+
+                            <!-- Login Button -->
+                            <div class="text-center pt-2">
+                                <button mat-raised-button color="primary" type="submit" class="btn btn-primary w-100"
+                                    [disabled]="loginForm.invalid">
+                                    Login
+                                </button>
+                            </div>
+
+                            <!-- Forgot Password & Signup Link -->
+                            <div class="d-flex justify-content-between mt-3">
+                                <a class="text-muted" href="#">Forgot password?</a>
+                                <p class="signup-link">
+                                    Don't have an account?
+                                    <a mat-button color="accent" routerLink="/register">Sign Up</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -6,14 +6,15 @@
     ViewData["Title"] = "Event List";
 }
 
-@if (User.IsInRole("Admin"))
-{
-    @await Html.PartialAsync("_EventsTablePartial", Model)
-}
-else
+@if (User.IsInRole("User"))
 {
     @await Html.PartialAsync("_EventsCardsPartial", Model)
 }
+else
+{
+    @await Html.PartialAsync("_EventsTablePartial", Model)
+}
+
 
 
 <!-- #region name -->

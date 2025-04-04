@@ -1,0 +1,97 @@
+<section class="gradient-form">
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-md-12 col-lg-12">
+                <div class="card rounded-3 text-black">
+                    <div class="card-body mx-md-4">
+                        <div class="text-center d-flex justify-content-center align-items-center">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                                style="width: 90px;" alt="logo">
+                            <h4 class="mt-1 mb-4 pb-1">Create Your Account</h4>
+                        </div>
+                        <div class="text-center">
+                            <p>Sign up to start banking</p>
+                        </div>
+
+                        <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+                            <!-- First Row: First Name & Last Name -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>First Name</mat-label>
+                                        <input matInput formControlName="firstName" type="text"
+                                            placeholder="Enter first name">
+                                        <mat-icon matSuffix>person</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Last Name</mat-label>
+                                        <input matInput formControlName="lastName" type="text"
+                                            placeholder="Enter last name">
+                                        <mat-icon matSuffix>person</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <!-- Second Row: Username & Email -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Username</mat-label>
+                                        <input matInput formControlName="username" type="text"
+                                            placeholder="Choose a username">
+                                        <mat-icon matSuffix>account_circle</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Email</mat-label>
+                                        <input matInput formControlName="email" type="email"
+                                            placeholder="Enter your email">
+                                        <mat-icon matSuffix>email</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <!-- Third Row: Password & Confirm Password -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Password</mat-label>
+                                        <input matInput formControlName="password" type="password"
+                                            placeholder="Enter password">
+                                        <mat-icon matSuffix>lock</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Confirm Password</mat-label>
+                                        <input matInput formControlName="confirmPassword" type="password"
+                                            placeholder="Confirm password">
+                                        <mat-icon matSuffix>lock</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <!-- Centered Register Button -->
+                            <div class="text-center pt-3">
+                                <button mat-raised-button color="primary" type="submit"
+                                    [disabled]="registerForm.invalid">
+                                    Register
+                                </button>
+                            </div>
+
+                            <!-- Login Link -->
+                            <div class="d-flex align-items-center justify-content-center mt-3">
+                                <p class="mb-0 me-2">Already have an account?</p>
+                                <a mat-button color="accent" routerLink="/auth">Login</a>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

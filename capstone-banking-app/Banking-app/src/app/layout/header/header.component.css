@@ -1,0 +1,144 @@
+/* Navbar Styling */
+.navbar-custom {
+    background: linear-gradient(to right, #003366, #005bbb);
+    color: white;
+    padding: 12px 20px;
+}
+
+.navbar-custom .navbar-brand {
+    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.navbar-custom button {
+    background: linear-gradient(to right, #64abf1, #1d81eb);
+    color: white;
+    border-radius: 8px;
+    border: 1px solid rgb(60, 60, 60);
+    padding: 2px 18px;
+}
+
+.navbar-custom button:hover {
+    background: linear-gradient(to right, #4098f1, #087bf5);
+    transform: scale(1.05);
+}
+
+.navbar-custom .menu-icon {
+    background: linear-gradient(to right, #64abf1, #1d81eb);
+    color: white;
+    border-radius: 8px;
+    border: 1px solid rgb(60, 60, 60);
+    padding: 2px 18px;
+}
+
+/* Sidebar Styling (Visible on Large Screens) */
+.sidebar {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background: #002244;
+    color: white;
+    padding-top: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 12px 20px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar ul li a mat-icon {
+    margin-right: 10px;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.mobile-menu {
+    background: white;
+    width: 320px;
+    border-radius: 10px;
+    padding: 20px;
+    animation: slideDown 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.menu-section h5 {
+    margin-bottom: 10px;
+    color: #005bbb;
+    font-weight: bold;
+}
+
+.menu-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-section ul li {
+    padding: 10px;
+}
+
+.menu-section ul li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+}
+
+.menu-section ul li a mat-icon {
+    margin-right: 10px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .sidebar {
+        display: none;
+    }
+}

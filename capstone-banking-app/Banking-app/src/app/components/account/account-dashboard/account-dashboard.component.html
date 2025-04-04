@@ -1,0 +1,38 @@
+<div class="account-header">
+    <button class="btn btn-primary create-account-btn" routerLink="/accounts/create">
+        ➕ Create Account
+    </button>
+</div>
+
+
+<div class="section_our_solution">
+    <div class="">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="our_solution_category">
+                <div class="solution_cards_box ">
+                    @for (account of accounts; track $index) {
+                    <div class="solution_card mx-2 my-3">
+                        <div class="hover_color_bubble"></div>
+                        <div class="solution_card_content">
+                            <h5 class="card-title text-center mb-3">🏦 Account Overview</h5>
+                            <hr class="mb-3">
+                            <p class="fw-bold">
+                                <i class="bi bi-bank2"></i> Account Number:
+                                <span class="text-muted">{{ account.id }}</span>
+                            </p>
+                            <p class="fw-bold">
+                                <i class="bi bi-wallet2"></i> Balance:
+                                <span class="text-success fw-semibold">₹{{ account.balance | number:'1.2-2' }}</span>
+                            </p>
+                            <p class="fw-bold">
+                                <i class="bi bi-person-circle"></i> Account Type:
+                                <span class="text-muted">{{ accountType[account.accountType] }}</span>
+                            </p>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

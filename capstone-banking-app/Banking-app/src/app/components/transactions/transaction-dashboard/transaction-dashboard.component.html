@@ -1,0 +1,54 @@
+<div class="container mt-4">
+    <!-- Create Transaction Button -->
+    <div class="d-flex justify-content-between mb-3">
+        <h3>Your Transactions</h3>
+        <button mat-button color="primary" routerLink="/transactions/create">
+            + Create Transaction
+        </button>
+    </div>
+
+    <!-- Transactions Table -->
+    <table mat-table [dataSource]="dataSource" matSort class="table table-striped">
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let transaction"> {{ transaction.accountId }} </td>
+        </ng-container>
+
+        <!-- Type Column -->
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef> Type </th>
+            <td mat-cell *matCellDef="let transaction"> {{ transactionType[transaction.type] }} </td>
+        </ng-container>
+
+        <!-- Amount Column -->
+        <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> Amount </th>
+            <td mat-cell *matCellDef="let transaction"> ₹{{ transaction.amount }} </td>
+        </ng-container>
+
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let transaction"> {{ transaction.description }} </td>
+        </ng-container>
+
+        <!-- From Accout Column -->
+        <ng-container matColumnDef="fromAccountId">
+            <th mat-header-cell *matHeaderCellDef> From Account </th>
+            <td mat-cell *matCellDef="let transaction"> {{ transaction.fromAccountId || "Cash" }} </td>
+        </ng-container>
+
+        <!-- Date Column -->
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+            <td mat-cell *matCellDef="let transaction"> {{ transaction.date | date:'short' }} </td>
+        </ng-container>
+
+        <!-- Header & Row Definitions -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+</div>
