@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+
 // const apiBaseUrl = 'http://localhost:5271';
 const apiBaseUrl = 'https://localhost:7134';
 
@@ -20,3 +22,21 @@ export const APP_CONSTANTS = {
 
 export const TransactionType = ['Deposite', 'Withdrawal', 'Transfer'];
 export const AccountType = ['Savings', 'Current'];
+
+export const AlertType = {
+  Success: 'success',
+  Error: 'error',
+};
+export function CommanAlert(
+  message: string = 'Internal server error',
+  alertType: string = 'error'
+) {
+  Swal.fire({
+    html: `<p style="font-size: 18px;">${message}</p>`,
+    icon: alertType === 'success' ? 'success' : 'error',
+    confirmButtonText: 'Ok',
+    customClass: {
+      popup: 'small-swal',
+    },
+  });
+}

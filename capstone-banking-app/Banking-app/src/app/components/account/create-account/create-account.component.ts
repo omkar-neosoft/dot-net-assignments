@@ -7,10 +7,9 @@ import {
 } from '@angular/forms';
 import { AccountsService } from '../../../services/accounts.service';
 import { AuthService } from '../../../services/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { AccountType } from '../../../constants';
+import { AccountType, AlertType, CommanAlert } from '../../../constants';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-create-account',
@@ -33,7 +32,7 @@ export class CreateAccountComponent {
     private fb: FormBuilder,
     private accountService: AccountsService,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private route: Router
   ) {
     this.accountForm = this.fb.group({
       accountType: ['', Validators.required],
@@ -54,7 +53,8 @@ export class CreateAccountComponent {
         });
       },
       error: (error) => {
-        alert(error);
+        CommanAlert(error.error.message, AlertType.Error);
+        console.error(error);
       },
     });
   }
@@ -64,12 +64,10 @@ export class CreateAccountComponent {
 
     const selectedType = this.accountForm.value.accountType;
 
-    // Restrict duplicate account type
     if (this.existingAccounts.includes(selectedType)) {
-      this.snackBar.open(
+      CommanAlert(
         `You already have a ${selectedType} account.`,
-        'Close',
-        { duration: 3000 }
+        AlertType.Error
       );
       return;
     }
@@ -79,15 +77,13 @@ export class CreateAccountComponent {
     this.createAccountForm.userId = this.authService.getUserId() || '';
     this.accountService.createAccount(this.createAccountForm).subscribe({
       next: (response) => {
-        this.snackBar.open('Account created successfully!', 'Close', {
-          duration: 3000,
-        });
-        this.loadExistingAccounts(); // Refresh user account list
+        CommanAlert('Account created successfully', AlertType.Success);
+        this.loadExistingAccounts();
+        this.route.navigate(['/accounts']);
       },
       error: (error) => {
-        this.snackBar.open('Failed to create account. Try again.', 'Close', {
-          duration: 3000,
-        });
+        CommanAlert(error.error.message, AlertType.Error);
+        console.error(error);
       },
     });
   }

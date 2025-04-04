@@ -39,7 +39,7 @@
                                 <div class="col-md-6">
                                     <mat-form-field appearance="outline">
                                         <mat-label>Username</mat-label>
-                                        <input matInput formControlName="username" type="text"
+                                        <input matInput formControlName="userName" type="text"
                                             placeholder="Choose a username">
                                         <mat-icon matSuffix>account_circle</mat-icon>
                                     </mat-form-field>
@@ -54,22 +54,28 @@
                                 </div>
                             </div>
 
-                            <!-- Third Row: Password & Confirm Password -->
                             <div class="row">
                                 <div class="col-md-6">
-                                    <mat-form-field appearance="outline">
+                                    <mat-form-field appearance="outline" class="w-100">
                                         <mat-label>Password</mat-label>
-                                        <input matInput formControlName="password" type="password"
-                                            placeholder="Enter password">
-                                        <mat-icon matSuffix>lock</mat-icon>
+                                        <input matInput [type]="showPassword ? 'text' : 'password'"
+                                            formControlName="password" placeholder="Enter password" />
+                                        <mat-icon matSuffix class="clickable-icon"
+                                            (click)="showPassword = !showPassword">
+                                            {{ showPassword ? 'visibility_off' : 'visibility' }}
+                                        </mat-icon>
                                     </mat-form-field>
                                 </div>
+
                                 <div class="col-md-6">
-                                    <mat-form-field appearance="outline">
+                                    <mat-form-field appearance="outline" class="w-100">
                                         <mat-label>Confirm Password</mat-label>
-                                        <input matInput formControlName="confirmPassword" type="password"
-                                            placeholder="Confirm password">
-                                        <mat-icon matSuffix>lock</mat-icon>
+                                        <input matInput [type]="showConfirmPassword ? 'text' : 'password'"
+                                            formControlName="confirmPassword" placeholder="Confirm password" />
+                                        <mat-icon matSuffix class="clickable-icon"
+                                            (click)="showConfirmPassword = !showConfirmPassword">
+                                            {{ showConfirmPassword ? 'visibility_off' : 'visibility' }}
+                                        </mat-icon>
                                     </mat-form-field>
                                 </div>
                             </div>

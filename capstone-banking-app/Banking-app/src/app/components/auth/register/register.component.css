@@ -43,6 +43,7 @@ button {
 
 button:hover {
     background: #004a99;
+    color: white;
     transform: scale(1.05);
 }
 

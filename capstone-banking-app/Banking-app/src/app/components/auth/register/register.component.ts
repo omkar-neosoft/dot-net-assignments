@@ -11,7 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { APP_CONSTANTS } from '../../../constants';
+import { AlertType, APP_CONSTANTS, CommanAlert } from '../../../constants';
 import { AuthService } from '../../../services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 
@@ -34,6 +34,8 @@ import { Router, RouterModule } from '@angular/router';
 export class RegisterComponent {
   apiUrl = APP_CONSTANTS.apiBaseUrl;
   registerForm: FormGroup;
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -62,13 +64,17 @@ export class RegisterComponent {
   onRegister() {
     if (this.registerForm.valid) {
       console.log('User Registered:', this.registerForm.value);
-      // Call your authentication service to register the user
-      this.authService
-        .register(this.registerForm.value)
-        .subscribe((response) => {
-          this.authService.storeToken(response.token);
+      this.authService.register(this.registerForm.value).subscribe({
+        next: (response) => {
+          this.authService.storeUserData(response);
+          CommanAlert('Registration successfully', AlertType.Success);
           this.router.navigate(['/dashboard']);
-        });
+        },
+        error: (error) => {
+          CommanAlert(error.error.message, AlertType.Error);
+          console.error(error);
+        },
+      });
     }
   }
 }

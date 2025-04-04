@@ -1,15 +1,9 @@
-/* .app-container {
-    display: flex;
+.small-swal {
+    width: 300px !important;
+    /* Adjust width */
+    height: auto !important;
+    /* Adjust height */
+    font-size: 14px;
+    /* Smaller text if needed */
+    padding: 10px !important;
 }
-
-.content {
-    flex-grow: 1;
-    padding: 20px;
-    margin-left: 250px;
-}
-
-@media (max-width: 768px) {
-    .content {
-        margin-left: 0;
-    }
-} */

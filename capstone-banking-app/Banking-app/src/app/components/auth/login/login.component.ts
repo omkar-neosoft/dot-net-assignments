@@ -14,6 +14,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import Swal from 'sweetalert2';
+import { AlertType, CommanAlert } from '../../../constants';
 
 @Component({
   selector: 'app-login',
@@ -51,11 +53,18 @@ export class LoginComponent {
   onLogin() {
     if (this.loginForm.valid) {
       console.log('Login successful', this.loginForm.value);
-      this.authService.login(this.loginForm.value).subscribe((response) => {
-        // this.authService.storeToken(response.token);
-        console.log({ responseSubc: response });
-        this.authService.storeUserData(response);
-        this.router.navigate(['/accounts']);
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (response) => {
+          // this.authService.storeToken(response.token);
+          console.log({ responseSubc: response });
+          this.authService.storeUserData(response);
+          CommanAlert('Login Success', AlertType.Success);
+          this.router.navigate(['/accounts']);
+        },
+        error: (error) => {
+          CommanAlert(error.error.message, AlertType.Error);
+          console.error(error);
+        },
       });
     }
   }

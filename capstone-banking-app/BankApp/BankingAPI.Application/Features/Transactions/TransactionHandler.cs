@@ -17,42 +17,13 @@ namespace BankingAPI.Application.Features.Transactions {
             _unitOfWork = unitOfWork;
         }
 
-        //public async Task<Transaction> Handle(CreateTransactionCommand request, CancellationToken cancellationToken) {
-        //    var transaction = new Transaction {
-        //        AccountId = request.AccountId,
-        //        Type = request.Type,
-        //        Amount = request.Amount,
-        //        Description = request.Description,
-        //        Date = DateTime.UtcNow
-        //    };
-
-        //    await _unitOfWork.Transactions.CreateAsync(transaction);
-
-        //    // Update Account Balance
-        //    var account = await _unitOfWork.Accounts.GetByIdAsync(request.AccountId);
-        //    if (account != null) {
-        //        if (request.Type == TransactionType.Withdrawal && account.Balance < request.Amount) {
-        //            throw new Exception("Insufficient balance.");
-        //        }
-
-        //        if (request.Type == TransactionType.Transfer && account.Balance < request.Amount) {
-        //            throw new Exception("Insufficient balance.");
-        //        }
-
-        //        account.Balance += request.Type == TransactionType.Deposit ? request.Amount : -request.Amount;
-        //        await _unitOfWork.Accounts.UpdateAsync(account);
-        //    }
-
-        //    return transaction;
-        //}
-
         public async Task<Transaction> Handle(CreateTransactionCommand request, CancellationToken cancellationToken) {
             if (request.Type == TransactionType.Transfer && request.AccountId == null) {
                 throw new Exception("ToAccountId is required for transfers.");
             }
 
             var transaction = new Transaction {
-                FromAccountId = request.Type == TransactionType.Transfer ? request.AccountId : null,
+                FromAccountId = request.Type == TransactionType.Transfer ? request.FromAccountId : null,
                 AccountId = request.AccountId,
                 Type = request.Type,
                 Amount = request.Amount,
@@ -86,7 +57,7 @@ namespace BankingAPI.Application.Features.Transactions {
 
             bool isTraansactionSuccess = false;
             // If it's a transfer, update the recipient account
-            if (request.Type == TransactionType.Deposit && request.FromAccountId != null) {
+            if (request.Type == TransactionType.Transfer && request.FromAccountId != null) {
                 var toAccount = await _unitOfWork.Accounts.GetByIdAsync(request.FromAccountId);
                 if (toAccount == null) {
                     throw new Exception("Recipient account not found.");
@@ -95,6 +66,17 @@ namespace BankingAPI.Application.Features.Transactions {
                 toAccount.Balance += request.Amount;
                 await _unitOfWork.Accounts.UpdateAsync(toAccount);
                 isTraansactionSuccess = true;
+
+                var newtransaction = new Transaction {
+                    FromAccountId = request.AccountId,
+                    AccountId = request.FromAccountId,
+                    Type = request.Type,
+                    Amount = request.Amount,
+                    Description = request.Description,
+                    Date = DateTime.UtcNow
+                };
+
+                await _unitOfWork.Transactions.CreateAsync(newtransaction);
             }
 
             // Update sender's balance

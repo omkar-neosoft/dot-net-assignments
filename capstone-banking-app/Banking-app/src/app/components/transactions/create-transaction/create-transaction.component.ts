@@ -10,6 +10,7 @@ import {
 import { TransactionsService } from '../../../services/transactions.service';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { AlertType, CommanAlert } from '../../../constants';
 
 @Component({
   selector: 'app-create-transaction',
@@ -57,6 +58,10 @@ export class CreateTransactionComponent implements OnInit {
 
         console.log({ accountId: this.accountId });
       },
+      error: (error) => {
+        CommanAlert(error.error.message, AlertType.Error);
+        console.error(error);
+      },
     });
   }
 
@@ -102,11 +107,12 @@ export class CreateTransactionComponent implements OnInit {
       console.log({ apiData });
       this.transactionsService.createTransaction(apiData).subscribe({
         next: () => {
-          alert('Transaction success');
+          CommanAlert('Transaction success', AlertType.Success);
           this.router.navigate(['/transactions']);
         },
-        error: () => {
-          alert('error in create trasaction');
+        error: (error) => {
+          CommanAlert(error.error.message, AlertType.Error);
+          console.error(error);
         },
       });
     }
